@@ -25,18 +25,36 @@
 //   }
 // });
 
-const number = Math.floor(Math.random() * 21);
+//i want the number to be from 1 to 20
+const secretNumber = Math.trunc(Math.random() * 20) + 1;
+let score = 20;
+//display the logic about the secret number to see is it correct
+
 document.querySelector('.check').addEventListener('click', function () {
   const guessNumber = Number(document.querySelector('.guess').value);
-  console.log(number);
+
   if (!guessNumber) {
-    document.querySelector('.message').textContent = 'No number entered';
+    document.querySelector('.message').textContent = '⛔ No number entered';
     return;
-  } else if (guessNumber === number) {
-    document.querySelector('.message').textContent = 'Corect number';
-  } else if (guessNumber > number) {
-    document.querySelector('.message').textContent = ' Too high';
-  } else if (guessNumber < number) {
-    document.querySelector('.message').textContent = 'Too low';
+  } else if (guessNumber === secretNumber) {
+    document.querySelector('.message').textContent = '✅ Correct number!';
+  } else if (guessNumber > secretNumber) {
+    if (score > 1) {
+      document.querySelector('.message').textContent = '📈 Too high';
+      score--;
+      document.querySelector('.score').textContent = score;
+    } else {
+      document.querySelector('.message').textContent = '⛔ You loose the game!';
+      document.querySelector('.score').textContent = 0;
+    }
+  } else if (guessNumber < secretNumber) {
+    if (score > 1) {
+      document.querySelector('.message').textContent = '📉 Too low';
+      score--;
+      document.querySelector('.score').textContent = score;
+    } else {
+      document.querySelector('.message').textContent = '⛔ You loose the game!';
+      document.querySelector('.score').textContent = 0;
+    }
   }
 });
