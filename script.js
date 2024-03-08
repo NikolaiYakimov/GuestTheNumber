@@ -37,9 +37,7 @@ document.querySelector('.check').addEventListener('click', function () {
   //if the number is not correct
   else if (guessNumber !== secretNumber) {
     if (score > 1) {
-      guessNumber > secretNumber
-        ? message('📈 Too high')
-        : message('📉 Too low');
+      message(guessNumber > secretNumber ? '📈 Too high' : '📉 Too low');
       score--;
       classScore(score);
     } else {
